@@ -6,9 +6,9 @@ import cv2
 import os
 import tensorflow as tf
 
-physical_devices = tf.config.experimental.list_physical_devices('GPU')
-tf.config.experimental.set_memory_growth(physical_devices[0], True)
-app=Flask(__name__,template_folder='templates')
+# physical_devices = tf.config.experimental.list_physical_devices('GPU')
+# tf.config.experimental.set_memory_growth(physical_devices[0], True)
+# app=Flask(__name__,template_folder='templates')
 
 json_file = open('output/model.json', 'r')
 loaded_model_json = json_file.read()
