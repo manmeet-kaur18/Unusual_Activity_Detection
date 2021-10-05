@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html >
+<!--From https://codepen.io/frytyler/pen/EGdtg-->
+<head>
+  <meta charset="UTF-8">
+  <title>ML API</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+  
+</head>
+
+<body style="display: flex;justify-content: center;">
+ <div class="login">
+	<h1>Predict Suspicious Activity in Prison</h1>
+    <form action="{{ url_for('predict')}}"method="post">
+        <select name="Camera" id = "ddlViewBy" required="required" />
+            <option value="camera1">Camera 1</option>
+            <option value="camera2">Camera 2</option>
+            <option value="camera3">Camera 3</option>
+            <option value="camera4">Camera 4</option>
+        </select>
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict</button>
+    </form>
+
+    <video width="1200" height="500" style="padding-top:10px" autoplay loop controls>
+      <source src={{ url_for('static', filename="Arrest048_x264_21.mp4") }} type="video/mp4" >
+    </video>
+    
+   <br>
+   <br>
+   {{ prediction_text }}
+
+ </div>
+</body>
+<script>
+  $("#ddlViewBy").on("change", function() {
+    var ddlViewBy = document.getElementById('ddlViewBy');
+    var value = ddlViewBy.options[ddlViewBy.selectedIndex].value;
+    var t;
+    if(value == "camera1"){
+      t = "/static/Arrest048_x264_21.mp4"
+    }
+    else if(value == "camera2"){
+      t = "/static/Abuse014_x264_1.mp4"
+    }
+    else if(value == "camera3"){
+        t = "/static/Robbery126_x264_3.mp4"
+    }
+    else{
+      t = "/static/Shoplifting018_x264_19.mp4"
+    }
+    
+    $("video").attr("src",t);
+});
+
+</script>
+</html>
